@@ -1,4 +1,4 @@
-[GDD](https://docs.google.com/document/d/18gyoUtC5aZrS9tlcMk4ktNpaUVSfr9G5uWjXz4wok-8/edit?usp=sharing) <br>
+[GDD]([https://docs.google.com/document/d/18gyoUtC5aZrS9tlcMk4ktNpaUVSfr9G5uWjXz4wok-8/edit?usp=sharing](https://docs.google.com/document/d/1B6_gSA0V9VIfIbpt4vWS84rFcvO6MYPKv6FYh0dO274/edit?usp=sharing)) <br>
 
 Designer: Alex, Shomu <br>
 Sound  <br>
