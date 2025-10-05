@@ -1,24 +1,55 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerObject : MonoBehaviour
 {
+    [SerializeField] GameObject projectile;
+    private bool fired = true;
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        float horizontalInput = Input.GetAxis("Horizontal");
+        //move left and right
+        if (Input.GetKey(KeyCode.A) || horizontalInput < 0)
         {
-            this.gameObject.transform.position += new Vector3(0, 0.01f, 0) * Time.deltaTime * 1000;
+            if (this.gameObject.transform.position.x >= -7)
+            {
+                this.gameObject.transform.position += new Vector3(-0.1f, 0, 0) * Time.deltaTime * 100;
+            }
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D) || horizontalInput > 0)
         {
-            this.gameObject.transform.position += new Vector3(-0.01f, 0, 0) * Time.deltaTime * 1000;
+            if (this.gameObject.transform.position.x <= 7)
+            {
+                this.gameObject.transform.position += new Vector3(0.1f, 0, 0) * Time.deltaTime * 100;
+            }
         }
-        if (Input.GetKey(KeyCode.S))
+        //attack
+        if (Gamepad.current != null)
         {
-            this.gameObject.transform.position += new Vector3(0, -0.01f, 0) * Time.deltaTime * 1000;
+            // Check if the 'A' button (or equivalent) is pressed
+            if (Gamepad.current[GamepadButton.A].isPressed)
+            {
+                if (fired == true) 
+                {
+                    Shoot();
+                }
+            }
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.gameObject.transform.position += new Vector3(0.01f, 0, 0) * Time.deltaTime * 1000;
-        }
+    }
+
+    private void Shoot()
+    {
+        fired = false;
+        GameObject newObject = Instantiate(projectile, transform.position, Quaternion.identity);
+        StartCoroutine(DelayAction());
+    }
+
+    IEnumerator DelayAction()
+    {
+        fired = false;
+        yield return new WaitForSeconds(1);
+        fired = true;
     }
 }
